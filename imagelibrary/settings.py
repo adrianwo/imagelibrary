@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "debug_toolbar",
     "accounts",
+    "images",
+    "django_sendfile",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +136,20 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+}
+
+# SENDFILE settings
+SENDFILE_BACKEND = "django_sendfile.backends.development"
+# SENDFILE_BACKEND = 'django_sendfile.backends.xsendfile'
+# SENDFILE_BACKEND = 'django_sendfile.backends.nginx'
+SENDFILE_ROOT = "/home/adrian/upload/protected"
+SENDFILE_URL = "/protected"

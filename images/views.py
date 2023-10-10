@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, authentication, permissions
+
+from images.permissions import CanGenerateLinksPermission
 from . import serializers
 from .models import Image, Link
 from django.contrib.auth.decorators import login_required
@@ -14,11 +16,6 @@ class ImageViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
     queryset = Image.objects.all()
     serializer_class = serializers.ImageSerializer
-
-    # def get_serializer_class(self):
-    #     profile = self.request.user.profile
-
-    #     return self.TIER_SERIALIZER["Enterprise"]
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -60,7 +57,10 @@ def _auth_download(request, download, t=None):
 
 class LinkViewSet(viewsets.ModelViewSet):
     authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.DjangoModelPermissions]
+    permission_classes = [
+        permissions.DjangoModelPermissions,
+        CanGenerateLinksPermission,
+    ]
     serializer_class = serializers.LinkSerializer
 
     def get_queryset(self):

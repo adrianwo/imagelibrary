@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.files.storage import FileSystemStorage
+import sys
+from tempfile import mkdtemp
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,3 +156,12 @@ SENDFILE_BACKEND = "django_sendfile.backends.development"
 # SENDFILE_BACKEND = 'django_sendfile.backends.nginx'
 SENDFILE_ROOT = "/home/adrian/upload/protected"
 SENDFILE_URL = "/protected"
+
+
+# DEFAULT_FILE_STORAGE = FileSystemStorage(location="/var/data", base_url="/")
+# if 'test' in sys.argv:
+#     DEFAULT_FILE_STORAGE = FileSystemStorage(location=mkdtemp(), base_url="/")
+SENDFILE_STORAGE = FileSystemStorage(location=SENDFILE_ROOT)
+TEST_TEMP_DIR = mkdtemp()
+if "test" in sys.argv:
+    SENDFILE_STORAGE = FileSystemStorage(location=TEST_TEMP_DIR)

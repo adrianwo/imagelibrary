@@ -40,8 +40,12 @@ class Profile(models.Model):
     }
 
     tier = models.CharField(max_length=15, choices=TIER_CHOICES, default="Basic")
-    height_1 = models.PositiveIntegerField(default=200)
-    height_2 = models.PositiveIntegerField(default=0)
+    height_1 = models.PositiveIntegerField(
+        default=200, verbose_name="Thumbnail #1 height"
+    )
+    height_2 = models.PositiveIntegerField(
+        default=0, verbose_name="Thumbnail #2 height"
+    )
     original_link = models.BooleanField(default=False)
     generate_link = models.BooleanField(
         default=False, verbose_name="Can generate links"

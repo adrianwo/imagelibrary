@@ -56,7 +56,20 @@ Uses gunicorn and nginx server.
    ```
    $ docker-compose -f docker-compose.prod.yml up -d --build
    ```
-4. Try it on http://localhost:1337 and admin page on http://localhost:1337/admin.
+4. During the initial startup, create a superuser account.
+   Check your CONTAINER_ID for image named imagelibrary-web
+   ```
+   $ docker ps
+   ```
+   Attach to your container
+   ```
+   $ docker exec -it CONTAINER_ID bash
+   ```
+   Create superuser account.
+   ```
+   # python manage.py createsuperuser
+   ```
+5. Try it on http://localhost:1337 and admin page on http://localhost:1337/admin.
 
 ## How to use this project?
 

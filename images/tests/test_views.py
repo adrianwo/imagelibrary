@@ -19,7 +19,7 @@ class ImageViewTestCase(TestCase):
             username="basic", password="pass", is_superuser=True
         )
 
-        Image.objects.create(
+        self.test_image = Image.objects.create(
             user=self.userBasic,
             image=SimpleUploadedFile("test_image.jpg", b"file_content"),
         )
@@ -125,3 +125,32 @@ class ImageViewTestCase(TestCase):
         response = self.client.post("/images/", {"image": image}, format="multipart")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_image_update_valid(self):
+        self.client.force_login(self.userBasic)
+        image = SimpleUploadedFile(
+            "test_image.jpg",
+            content=base64.b64decode(
+                "iVBORw0KGgoAAAANSUhEUgAAAAUA"
+                + "AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO"
+                + "9TXL0Y4OHwAAAABJRU5ErkJggg=="
+            ),
+            content_type="image/jpg",
+        )
+
+        response = self.client.put(
+            f"/images/{self.test_image.id}/",
+            {"id": self.test_image.pk, "image": image, "title": "nowy tytul"},
+            format="multipart",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_image_partial_update_valid(self):
+        self.client.force_login(self.userBasic)
+
+        response = self.client.patch(
+            f"/images/{self.test_image.id}/",
+            {"id": self.test_image.pk, "title": "nowy tytul"},
+            format="multipart",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

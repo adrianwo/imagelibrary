@@ -27,7 +27,9 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Image
         fields = (
+            "id",
             "url",
+            "title",
             "image",
             "original_image",
             "thumbnail_1",

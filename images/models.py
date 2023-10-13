@@ -61,9 +61,15 @@ class Image(models.Model):
 
     thumbnail_1 = ImageSpecField(source="image", id="upload:uploaded_image:thumbnail_1")
     thumbnail_2 = ImageSpecField(source="image", id="upload:uploaded_image:thumbnail_2")
+    title = models.CharField(max_length=100, blank=True)
 
     def is_user_allowed(self, user):
         return self.user.pk == user.pk
+
+    def save(self, *args, **kwargs):
+        if not self.id and self.title == "":
+            self.title = self.image.name
+        super().save(*args, **kwargs)
 
 
 class LinkManager(models.Manager):

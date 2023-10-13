@@ -19,7 +19,7 @@ There are three built-in tiers:
 
 The user interface is built using the browsable API of Django Rest Framework, while the admin UI is developed within django-admin.
 
-##How to run this project?
+## How to run this project?
 
 ### Development
 
@@ -58,7 +58,7 @@ Uses gunicorn and nginx server.
    ```
 4. Try it on http://localhost:1337 and admin page on http://localhost:1337/admin.
 
-##How to use project?
+## How to use this project?
 
 ### Admin
 

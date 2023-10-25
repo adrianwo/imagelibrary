@@ -78,8 +78,9 @@ Uses gunicorn and nginx server.
 User management.
 Every user should have appropriate permissions assigned.
 
-![image](https://github.com/adrianwo/imagelibrary/assets/5526483/43883c82-20b8-42f8-9e2e-c373d80a76c0)
+![perms](https://github.com/adrianwo/imagelibrary/assets/5526483/124bd2c6-4d46-413c-a220-f6d0c460745f)
 
 Assign desired values in "User" detail view in section "Profile".
 
-![image](https://github.com/adrianwo/imagelibrary/assets/5526483/eec91bba-225f-437c-b8b7-ce88b40cb33b)
+![profile](https://github.com/adrianwo/imagelibrary/assets/5526483/6f2aeb73-daf0-4bb8-b2c9-949510e07760)
+
